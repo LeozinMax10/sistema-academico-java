@@ -1,5 +1,11 @@
 package br.edu.fatecguarulhos.sisacademico.daos;
 
-public class AlunoDAO {
+import br.edu.fatecguarulhos.sisacademico.models.Aluno;
 
+public class AlunoDAO {
+	
+	public void deletarAluno(Aluno aluno) {
+		deletarNotas();
+	}
+	private void deletarNotas() {}
 }
