@@ -1,6 +1,6 @@
 CREATE DATABASE db_cadastro_alunos;
 
-CREATE TABLE aluno(
+CREATE TABLE IF NOT EXISTS aluno(
 	rgm INTEGER PRIMARY KEY,
 	nome VARCHAR(50),
 	email VARCHAR(50),
@@ -11,19 +11,21 @@ CREATE TABLE aluno(
 	celular VARCHAR(50)
 );
 
-CREATE TABLE curso(
+CREATE TABLE IF NOT EXISTS curso(
 	codigo INTEGER PRIMARY KEY,
 	nome VARCHAR(50),
 	campus VARCHAR(50),
 	turno VARCHAR(15)
 );
 
-CREATE TABLE disciplina(
-	código INTEGER PRIMARY KEY,
-	fk_rgm_aluno INTEGER FOREIGN KEY REFERENCES aluno(rgm),
-	fk_codigo_curso INTEGER FOREIGN KEY REFERENCES curso(codigo),
+CREATE TABLE IF NOT EXISTS disciplina(
+	codigo INTEGER PRIMARY KEY,
+	rgm_aluno INTEGER,
+	codigo_curso INTEGER,
 	nome VARCHAR(50),
 	faltas INTEGER,
 	nota FLOAT,
-	semestre VARCHAR(10)
+	semestre VARCHAR(10),
+	CONSTRAINT fk_aluno FOREIGN KEY(rgm_aluno) REFERENCES aluno(rgm),
+	CONSTRAINT fk_curso FOREIGN KEY(codigo_curso) REFERENCES curso(codigo)
 );
